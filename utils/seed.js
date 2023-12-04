@@ -12,6 +12,13 @@ const users = [
   },
 ];
 
+const thoughts = [
+  {
+    username: "Kaladin",
+    thoughtText: "Honor is Dead, But I'll see what I can do"
+  },
+];
+
 console.log(connection);
 
 // Connects to server
@@ -21,10 +28,15 @@ connection.once("open", async () => {
   // Drop existing students
   await User.deleteMany({});
 
+  await Thought.deleteMany({})
+
   // Adds seed data to database
   await User.collection.insertMany(users);
 
+  await Thought.collection.insertMany(thoughts);
+
   console.table(users);
+  console.table(thoughts);
   console.info("Seeding complete! 🌱");
   process.exit(0);
 });
